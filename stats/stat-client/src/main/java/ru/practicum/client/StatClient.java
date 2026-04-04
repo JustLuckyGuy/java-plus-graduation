@@ -13,7 +13,7 @@ import ru.practicum.dto.ViewStats;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@FeignClient(name = "stat-server")
+@FeignClient(name = "stats-server")
 public interface StatClient {
     @PostMapping("/hit")
     @ResponseStatus(HttpStatus.CREATED)
