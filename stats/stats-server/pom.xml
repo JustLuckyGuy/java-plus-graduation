@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>ru.practicum</groupId>
-        <artifactId>stat</artifactId>
+        <artifactId>stats</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>stat-server</artifactId>
+    <artifactId>stats-server</artifactId>
     <packaging>jar</packaging>
 
     <properties>
@@ -91,7 +91,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>ru.practicum.stat.server.StatServer</mainClass>
+                    <mainClass>ru.practicum.stats.server.StatsServer</mainClass>
                     <layout>JAR</layout>
                 </configuration>
             </plugin>

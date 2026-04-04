@@ -2,7 +2,7 @@
 <project version="4">
   <component name="AmplicodePersistenceUnitSettings">
     <persistence-units>
-      <persistence-unit moduleName="stat-server" name="Default">
+      <persistence-unit moduleName="stats-server" name="Default">
         <packages>
           <package value="practicum" />
         </packages>
