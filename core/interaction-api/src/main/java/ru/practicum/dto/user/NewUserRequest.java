@@ -8,9 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Getter
-@Setter
-@ToString
+@Data
 public class NewUserRequest {
     @NotBlank
     @Size(min = 2, max = 250)

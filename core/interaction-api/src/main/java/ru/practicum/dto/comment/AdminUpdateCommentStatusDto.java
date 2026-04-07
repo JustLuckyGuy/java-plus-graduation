@@ -6,9 +6,7 @@ import ru.practicum.enums.AdminUpdateCommentStatusAction;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Getter
-@Setter
-@ToString
+@Data
 public class AdminUpdateCommentStatusDto {
     private AdminUpdateCommentStatusAction action;
 }

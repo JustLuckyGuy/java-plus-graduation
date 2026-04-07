@@ -1,8 +1,6 @@
 package ru.practicum.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import ru.practicum.enums.RequestStatus;
 import ru.practicum.model.Request;
 
@@ -24,9 +22,4 @@ public interface RequestRepository extends JpaRepository<Request, Long> {
 
     List<Request> findByIdIn(List<Long> ids);
 
-    @Query("SELECT r.eventId, " +
-            "COUNT(r) " +
-            "FROM Request r " +
-            "WHERE r.eventId IN :eventIds AND r.status = 'CONFIRMED' GROUP BY r.eventId")
-    List<Object[]> countConfirmedByEventIds(@Param("eventIds") List<Long> eventIds);
 }

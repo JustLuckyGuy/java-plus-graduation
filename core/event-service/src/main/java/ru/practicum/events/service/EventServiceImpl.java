@@ -81,7 +81,7 @@ public class EventServiceImpl implements EventService {
     @Transactional
     public EventFullDto addEvent(Long userId, NewEventDto eventCreateDto) {
         log.info("Валидация даты и времени события");
-        validateEventDate(eventCreateDto.eventDate(), EventState.PENDING);
+        validateEventDate(eventCreateDto.eventDate());
 
         checkUserExists(userId);
 
@@ -156,25 +156,12 @@ public class EventServiceImpl implements EventService {
         return buildFullDto(updatedEvent);
     }
 
-    private void validateEventDate(LocalDateTime eventDate, EventState currentState) {
+    private void validateEventDate(LocalDateTime eventDate) {
         LocalDateTime now = LocalDateTime.now();
 
-        int minHours;
-        if (currentState == EventState.PUBLISHED) {
-            minHours = 1;
-        } else {
-            minHours = 2;
-        }
-
-        LocalDateTime minValidDate = now.plusHours(minHours);
+        LocalDateTime minValidDate = now.plusHours(2);
         if (eventDate.isBefore(minValidDate)) {
-            String message;
-            if (minHours == 1) {
-                message = "Дата начала изменяемого события должна быть не ранее чем за час от даты публикации";
-            } else {
-                message = "Дата и время на которые намечено событие не может быть раньше, чем через два часа от текущего момента";
-            }
-            throw new ValidationException(message);
+            throw new ValidationException("Дата и время на которые намечено событие не может быть раньше, чем через два часа от текущего момента");
         }
     }
 

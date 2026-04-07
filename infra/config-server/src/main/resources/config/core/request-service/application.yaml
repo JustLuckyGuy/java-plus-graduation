@@ -22,8 +22,3 @@ spring:
 
 stats-server:
   url: http://localhost:9090
-
-logging:
-  level:
-    root: INFO
-    ru.yandex.practicum.explorewithme.main: DEBUG

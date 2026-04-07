@@ -9,9 +9,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Getter
-@Setter
-@ToString
+@Data
 public class CategoryDto {
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Long id;

@@ -13,7 +13,7 @@ spring:
         - id: user-service_route
           uri: lb://user-service
           predicates:
-            - Path=/admin/users/**
+            - Path=/admin/users/**, /internal/users/**
         - id: request_service_route
           uri: lb://request-service
           predicates:
@@ -25,11 +25,10 @@ spring:
         - id: comment_service_route
           uri: lb://comment-service
           predicates:
-            - Path=/admin/comments/**,/users/*/comments/**,/users/*/events/*/comments/**,/events/*/comments/**
+            - Path=/admin/comments/**,/users/*/comments/**,/users/*/events/*/comments/**
 
 logging:
   level:
-    ru.practicum: TRACE
     org.springframework.cloud.gateway: TRACE
     org.springframework.cloud.gateway.route: TRACE
   pattern:

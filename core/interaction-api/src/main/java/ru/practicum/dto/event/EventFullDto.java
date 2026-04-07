@@ -12,42 +12,40 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Getter
-@Setter
-@ToString
+@Data
 public class EventFullDto {
-    Long id;
+    private Long id;
 
-    String annotation;
+    private String annotation;
 
-    CategoryDto category;
+    private CategoryDto category;
 
-    Long confirmedRequests;
-
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DateTimePattern.DATE_TIME_PATTERN)
-    LocalDateTime createdOn;
-
-    String description;
+    private Long confirmedRequests;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DateTimePattern.DATE_TIME_PATTERN)
-    LocalDateTime eventDate;
+    private LocalDateTime createdOn;
 
-    UserShortDto initiator;
-
-    LocationDto location;
-
-    Boolean paid;
-
-    Integer participantLimit;
+    private String description;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DateTimePattern.DATE_TIME_PATTERN)
-    LocalDateTime publishedOn;
+    private LocalDateTime eventDate;
 
-    Boolean requestModeration;
+    private UserShortDto initiator;
 
-    EventState state;
+    private LocationDto location;
 
-    String title;
+    private Boolean paid;
 
-    Long views;
+    private Integer participantLimit;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DateTimePattern.DATE_TIME_PATTERN)
+    private LocalDateTime publishedOn;
+
+    private Boolean requestModeration;
+
+    private EventState state;
+
+    private String title;
+
+    private Long views;
 }

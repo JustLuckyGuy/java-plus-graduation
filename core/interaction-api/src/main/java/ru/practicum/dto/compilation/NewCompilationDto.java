@@ -10,9 +10,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Getter
-@Setter
-@ToString
+@Data
 public class NewCompilationDto {
     @Nullable
     private List<Long> events;

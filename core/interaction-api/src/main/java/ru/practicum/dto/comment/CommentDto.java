@@ -7,9 +7,7 @@ import ru.practicum.enums.CommentStatus;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Getter
-@Setter
-@ToString
+@Data
 public class CommentDto {
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private long id;

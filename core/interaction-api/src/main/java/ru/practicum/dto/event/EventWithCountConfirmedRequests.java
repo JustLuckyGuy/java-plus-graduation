@@ -1,10 +1,8 @@
 package ru.practicum.dto.event;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class EventWithCountConfirmedRequests {
     private Long eventId;
 

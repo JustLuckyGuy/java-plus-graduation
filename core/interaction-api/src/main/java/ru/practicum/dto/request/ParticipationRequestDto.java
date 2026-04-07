@@ -10,9 +10,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Getter
-@Setter
-@ToString
+@Data
 public class ParticipationRequestDto {
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Long id;

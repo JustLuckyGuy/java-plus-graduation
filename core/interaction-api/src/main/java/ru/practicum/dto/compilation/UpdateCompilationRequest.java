@@ -8,9 +8,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Getter
-@Setter
-@ToString
+@Data
 public class UpdateCompilationRequest {
     private List<Long> events;
     private Boolean pinned = false;

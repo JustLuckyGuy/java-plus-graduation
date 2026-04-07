@@ -8,9 +8,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Getter
-@Setter
-@ToString
+@Data
 public class CompilationDto {
     private Long id;
     private List<EventShortDto> events;
