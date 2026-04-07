@@ -8,6 +8,6 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableFeignClients
 public class EventService {
     public static void main(String[] args) {
-        SpringApplication.run(EventService.class);
+        SpringApplication.run(EventService.class, args);
     }
 }
