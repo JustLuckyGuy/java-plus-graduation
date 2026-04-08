@@ -1,0 +1,14 @@
+package ru.practicum.dto.request;
+
+import lombok.*;
+
+import java.util.List;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Data
+public class EventRequestStatusUpdateResult {
+    private List<ParticipationRequestDto> confirmedRequests;
+    private List<ParticipationRequestDto> rejectedRequests;
+}

@@ -8,16 +8,27 @@ spring:
     gateway:
       discovery:
         locator:
-          enabled: true
+          enabled: false
       routes:
-        - id: main_service_route
-          uri: lb://main-service
+        - id: user-service_route
+          uri: lb://user-service
           predicates:
-            - Path=/**
+            - Path=/admin/users/**, /internal/users/**
+        - id: request_service_route
+          uri: lb://request-service
+          predicates:
+            - Path=/internal/requests/**,/users/*/requests/**,/users/*/events/*/requests/**
+        - id: event_service_route
+          uri: lb://event-service
+          predicates:
+            - Path=/admin/events/**,/events/**,/users/*/events/**,/admin/categories/**,/categories/**,/admin/compilations/**,/compilations/**
+        - id: comment_service_route
+          uri: lb://comment-service
+          predicates:
+            - Path=/admin/comments/**,/users/*/comments/**,/users/*/events/*/comments/**
 
 logging:
   level:
-    ru.practicum: TRACE
     org.springframework.cloud.gateway: TRACE
     org.springframework.cloud.gateway.route: TRACE
   pattern:
