@@ -13,8 +13,11 @@
     <packaging>pom</packaging>
     <modules>
         <module>stat-client</module>
-        <module>stats-server</module>
-        <module>stat-dto</module>
+        <module>serialization</module>
+        <module>aggregator</module>
+        <module>analyzer</module>
+        <module>collector</module>
+        <module>common</module>
     </modules>
 
     <properties>
