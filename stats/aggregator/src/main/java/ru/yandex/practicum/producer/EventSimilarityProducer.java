@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.avro.specific.SpecificRecordBase;
 import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerRecord;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import ru.practicum.ewm.stats.avro.EventSimilarityAvro;
 import ru.yandex.practicum.config.KafkaClient;
@@ -17,6 +18,8 @@ import java.time.Duration;
 @RequiredArgsConstructor
 public class EventSimilarityProducer {
     private final KafkaClient kafkaClient;
+    @Value("${kafka.topics.stats-events-similarity-v1}")
+    private String eventSimilarity;
     private Producer<Long, SpecificRecordBase> producer;
 
     public void send(EventSimilarityAvro similarity) {
@@ -24,7 +27,7 @@ public class EventSimilarityProducer {
         Long key = similarity.getEventA();
 
         ProducerRecord<Long, SpecificRecordBase> record = new ProducerRecord<>(
-                kafkaClient.getTopicsProperties().getEventsSimilarity(),
+                eventSimilarity,
                 null,
                 timestamp,
                 key,

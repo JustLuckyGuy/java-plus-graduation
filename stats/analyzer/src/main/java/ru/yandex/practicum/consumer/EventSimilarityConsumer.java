@@ -7,6 +7,7 @@ import org.apache.kafka.clients.consumer.Consumer;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.OffsetAndMetadata;
 import org.apache.kafka.common.TopicPartition;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import ru.yandex.practicum.config.KafkaClient;
 
@@ -17,8 +18,10 @@ import java.util.Map;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class EventSimilarityConsumer {
+public class EventSimilarityConsumer implements AutoCloseable {
     private final KafkaClient kafkaClient;
+    @Value("${kafka.topics.stats-events-similarity-v1}")
+    private String eventSimilarity;
     private Consumer<Long, SpecificRecordBase> consumer;
 
     public ConsumerRecords<Long, SpecificRecordBase> poll(Duration timeout) {
@@ -26,8 +29,8 @@ public class EventSimilarityConsumer {
     }
 
     public void subscribe() {
-        getConsumer().subscribe(List.of(kafkaClient.getTopicsProperties().getEventsSimilarity()));
-        log.info("Подписка на топик сходств: {}", kafkaClient.getTopicsProperties().getEventsSimilarity());
+        getConsumer().subscribe(List.of(eventSimilarity));
+        log.info("Подписка на топик сходств: {}", eventSimilarity);
     }
 
     public void commitAsync(Map<TopicPartition, OffsetAndMetadata> offsets) {
@@ -57,6 +60,7 @@ public class EventSimilarityConsumer {
         }
     }
 
+    @Override
     public void close() {
         if (consumer != null) {
             try {

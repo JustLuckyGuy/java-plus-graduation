@@ -5,7 +5,6 @@ import org.apache.kafka.clients.consumer.Consumer;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.serialization.LongDeserializer;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,11 +30,8 @@ public class KafkaConfig {
     @Value("${kafka.consumer.poll.timeout:1000}")
     private long pollTimeout;
 
-    @Autowired
-    private KafkaTopicsProperties topicsProperties;
-
     @Bean
-    @Scope("prototype")
+    @Scope("singleton")
     public KafkaClient kafkaClient() {
         return new KafkaClient() {
 
@@ -63,10 +59,6 @@ public class KafkaConfig {
                 return Duration.ofMillis(pollTimeout);
             }
 
-            @Override
-            public KafkaTopicsProperties getTopicsProperties() {
-                return topicsProperties;
-            }
 
             private Consumer<Long, SpecificRecordBase> createConsumerAction() {
                 Map<String, Object> config = new HashMap<>();

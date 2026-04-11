@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.avro.specific.SpecificRecordBase;
 import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerRecord;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import ru.practicum.ewm.stats.avro.UserActionAvro;
 import ru.yandex.practicum.config.KafkaClient;
@@ -17,6 +18,8 @@ import java.time.Duration;
 @RequiredArgsConstructor
 public class UserActionProducer {
     private final KafkaClient kafkaClient;
+    @Value("${kafka.topics.stats-user-action-v1}")
+    private String userActions;
     private Producer<Long, SpecificRecordBase> producer;
 
     public void sendUserAction(UserActionAvro userAction) {
@@ -32,7 +35,7 @@ public class UserActionProducer {
         }
 
         ProducerRecord<Long, SpecificRecordBase> record = new ProducerRecord<>(
-                kafkaClient.getTopicsProperties().getUserActions(),
+                userActions,
                 null,
                 userAction.getTimestamp().toEpochMilli(),
                 userAction.getUserId(),

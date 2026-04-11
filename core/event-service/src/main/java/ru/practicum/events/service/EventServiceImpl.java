@@ -240,7 +240,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public Stream<RecommendedEventProto> getRecommendations(Long userId, int maxResults) {
+    public List<RecommendedEventProto> getRecommendations(Long userId, int maxResults) {
         log.info("Получение рекомендаций для пользователя userId={}, maxResults={}", userId, maxResults);
 
         UserPredictionsRequestProto request = UserPredictionsRequestProto.newBuilder()
@@ -248,7 +248,7 @@ public class EventServiceImpl implements EventService {
                 .setMaxResults(maxResults)
                 .build();
 
-        return analyzerClient.getRecommendationsForUser(request);
+        return analyzerClient.getRecommendationsForUser(request).toList();
     }
 
     @Override

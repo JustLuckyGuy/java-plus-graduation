@@ -27,7 +27,7 @@ public interface EventService {
 
     Event getEventOrThrow(Long eventId);
 
-    Stream<RecommendedEventProto> getRecommendations(Long userId, int maxResults);
+    List<RecommendedEventProto> getRecommendations(Long userId, int maxResults);
 
     void likeEvent(Long userId, Long eventId);
 }

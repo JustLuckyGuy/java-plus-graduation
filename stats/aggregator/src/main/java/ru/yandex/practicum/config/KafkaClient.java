@@ -13,5 +13,4 @@ public interface KafkaClient {
 
     Duration getPollTimeout();
 
-    KafkaTopicsProperties getTopicsProperties();
 }

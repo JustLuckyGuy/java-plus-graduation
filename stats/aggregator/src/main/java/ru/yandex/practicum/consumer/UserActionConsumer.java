@@ -7,6 +7,7 @@ import org.apache.kafka.clients.consumer.Consumer;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.OffsetAndMetadata;
 import org.apache.kafka.common.TopicPartition;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import ru.yandex.practicum.config.KafkaClient;
 
@@ -17,17 +18,19 @@ import java.util.Map;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class UserActionConsumer {
+public class UserActionConsumer implements AutoCloseable {
     private final KafkaClient kafkaClient;
     private Consumer<Long, SpecificRecordBase> consumer;
+    @Value("${kafka.topics.stats-user-action-v1}")
+    private String userAction;
 
     public ConsumerRecords<Long, SpecificRecordBase> poll(Duration timeout) {
         return getConsumer().poll(timeout);
     }
 
     public void subscribe() {
-        getConsumer().subscribe(List.of(kafkaClient.getTopicsProperties().getUserActions()));
-        log.info("Подписка на топик: {}", kafkaClient.getTopicsProperties().getUserActions());
+        getConsumer().subscribe(List.of(userAction));
+        log.info("Подписка на топик: {}", userAction);
     }
 
     public void commitAsync(Map<TopicPartition, OffsetAndMetadata> offsets) {
@@ -61,6 +64,7 @@ public class UserActionConsumer {
         }
     }
 
+    @Override
     public void close() {
         if (consumer != null) {
             try {

@@ -40,7 +40,7 @@ public class EventPublicController {
     }
 
     @GetMapping("/recommendations")
-    public Stream<RecommendedEventProto> getRecommendations(
+    public List<RecommendedEventProto> getRecommendations(
             @RequestHeader("X-EWM-USER-ID") Long userId,
             @RequestParam(defaultValue = "10") int maxResults) {
 

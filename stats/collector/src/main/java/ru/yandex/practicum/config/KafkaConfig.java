@@ -6,7 +6,6 @@ import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.LongSerializer;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,11 +27,8 @@ public class KafkaConfig {
     @Value("${kafka.consumer.poll.timeout:1000}")
     private long pollTimeout;
 
-    @Autowired
-    private KafkaTopicsProperties topicsProperties;
-
     @Bean
-    @Scope("prototype")
+    @Scope("singleton")
     public KafkaClient kafkaClient() {
         return new KafkaClient() {
 
@@ -54,11 +50,6 @@ public class KafkaConfig {
             @Override
             public Duration getPollTimeout() {
                 return Duration.ofMillis(pollTimeout);
-            }
-
-            @Override
-            public KafkaTopicsProperties getTopicsProperties() {
-                return topicsProperties;
             }
 
             private Producer<Long, SpecificRecordBase> createProducer() {
