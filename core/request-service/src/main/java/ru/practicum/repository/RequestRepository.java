@@ -1,6 +1,8 @@
 package ru.practicum.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import ru.practicum.enums.RequestStatus;
 import ru.practicum.model.Request;
 
@@ -21,5 +23,7 @@ public interface RequestRepository extends JpaRepository<Request, Long> {
     List<Request> findByEventIdAndStatus(Long eventId, RequestStatus status);
 
     List<Request> findByIdIn(List<Long> ids);
+
+    boolean existsByRequesterIdAndEventIdAndStatus(Long userId, Long eventId, RequestStatus status);
 
 }
